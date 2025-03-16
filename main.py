@@ -1,7 +1,7 @@
 import flet as ft
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
+    page.title = "ARKHI 1"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
@@ -25,4 +25,4 @@ def main(page: ft.Page):
         )
     )
 
-ft.app(main)
+ft.app(main, view=ft.AppView.WEB_BROWSER)
