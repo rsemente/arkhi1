@@ -10,6 +10,19 @@ import random
 #3 - Sortear força do vento - 1d10
 #4 - Sortear Temperatura - 1d20 + 1d10 + 40
 
+#Proximas alterações funcionais
+# Encontro rolar com tesouro
+# Rolador de dados
+# Criador de nomes aleatoreos
+# Criar login
+# savar rolages para a pessoa
+# criar lista de equipamentos e inventário
+
+
+#Proximas alterações estéticas
+# imprimir em uma caixa de texto
+# ativar funções com botões - ok
+
 def dado(n,l):
   #n = numero de dados
   #l = igual a numero de lados do dado
@@ -112,16 +125,7 @@ def atributos():
       saida += "\n\nForça:        "+str(sum(aux))+"("+ str(ajuste)+")"+str(aux )
       aux = dado(3,6)
       total = sum(aux)
-      if  total < 4:
-        ajuste = -1
-      elif total < 13:
-        ajuste = 0
-      elif total < 16:
-        ajuste = +1
-      elif total < 18:
-        ajuste = +2
-      else:
-        ajuste = +3
+      ajuste = ajuste_padrao(total)
       ajuste_total += ajuste
       saida += '\n'+"Inteligência: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
       aux = dado(3,6)
@@ -330,7 +334,7 @@ def Tabela6():
   saida = '\n'+ tabela6[aux[0]-1][0] +' Quantidade: '+  str(quantidade(tabela6[aux[0]-1][1]))  +' PVs: '+  str(pv(tabela6[aux[0]-1][2]))
   return saida
 
-def arkhi(opcao):
+def arkhi(opcao, quantidade):
     txtsaida = ''
     print(type(opcao))
     if opcao == "1":
@@ -355,7 +359,7 @@ def arkhi(opcao):
 # Encontros Aleatóreos
     elif opcao == "3":
         #aux = input('Digite quantos encontros deseja sortear: ')
-        aux = '4'
+        aux = quantidade
         for i in range(int(aux)):
           aux = dado(1,6)
           if aux[0] == 1:
@@ -404,32 +408,95 @@ def main(page):
 
         )    
 
+    def meu_app(nome,dados):
+            page.clean()
+            page.add(app_bar)
+            #page.add(ft.Text("\nO que deseja fazer? \n1 - Condições do tempo \n2 - Rolar atributos \n3 - Encontro Aleatorio \n"))
+            page.add(ft.ElevatedButton("Gerar condições iniciais de jogo", on_click=btn_click))
+            page.add(ft.ElevatedButton("Rolar atributos de personagens", on_click=btn_click2))
+
+            row = ft.Row(spacing=0, controls=[ft.ElevatedButton("Gerar encontros aleatóreos", on_click=btn_click3),
+                                              txt_name,])
+                     
+            page.add(row)
+            
+            row = ft.Row(spacing=0, controls=[ft.ElevatedButton("rolar dados", on_click=rolar_dados),
+                                              txt_qdado,
+                                              txt_tipo_dado,ft.Text(f"{dados}"),])
+            page.add(row)
+            page.add(ft.Text(f"{nome}"))
+            page.add(ft.Text("\n\n\nARKHI 1 v0.2 \ncriado por Rodrigo Soares Semente - duvidas, reportar bugs e sugestões enviar e-mail para: rodrigo.semente@ufersa.edu.br "))
+
+
     def btn_click(e):
+        #if not txt_name.value:
+        #    txt_name.error_text = "Por favor, insira seu nome"
+        #    page.update()
+        #else:
+            #print(type(txt_name.value))
+            saidaarkhi = arkhi('1',0)
+            name = saidaarkhi #txt_name.value
+            meu_app(name,'')
+
+    def btn_click2(e):
+        #if not txt_name.value:
+        #    txt_name.error_text = "Por favor, insira seu nome"
+        #    page.update()
+        #else:
+            #print(type(txt_name.value))
+            saidaarkhi = arkhi('2',0)
+            name = saidaarkhi #txt_name.value
+            meu_app(name,'')
+
+
+    def btn_click3(e):
         if not txt_name.value:
-            txt_name.error_text = "Please enter your name"
+            txt_name.error_text = "Por favor, digite a quantidade de encontros que deseja criar"
             page.update()
         else:
-            print(type(txt_name.value))
-            saidaarkhi = arkhi(txt_name.value)
+            #print(type(txt_name.value))
+            saidaarkhi = arkhi('3',txt_name.value)
             name = saidaarkhi #txt_name.value
-            page.clean()
+            meu_app(name,'')
 
-            page.add(app_bar)
-            page.add(ft.Text("\nO que deseja fazer? \n1 - Condições do tempo \n2 - Rolar atributos \n3 - Encontro Aleatorio \n"))
-            page.add(txt_name, ft.ElevatedButton("Say hello!", on_click=btn_click))
-            page.add(ft.Text(f"{name}"))
+    def btn_click3(e):
+        if not txt_name.value:
+            txt_name.error_text = "Por favor, digite a quantidade de encontros que deseja criar"
+            page.update()
+        else:
+            #print(type(txt_name.value))
+            saidaarkhi = arkhi('3',txt_name.value)
+            name = saidaarkhi #txt_name.value
+            meu_app(name,'')
+
+    def rolar_dados(e):
+        if not txt_qdado.value:
+            txt_qdado.error_text = "Quantidade de dados errada"
+            page.update()
+        elif not txt_tipo_dado.value:
+            txt_tipo_dado.error_text = "Tipo de dados errado"
+            page.update()
+        else:
+            #print(type(txt_name.value))
+            aux = dado(int(txt_qdado.value),int(txt_tipo_dado.value))
+            dados = str(sum(aux))+ '  '+ str(aux)
+            #page.clean(name)
+
+            meu_app(name,dados)
 
     page.title = "ARKHI 1"
     #page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     #Icons: CASSINO, CASTLE COLORIZE DARK_MODE EMOJI_OBJECTS   EMOJI_FLAGS  FILTER_HDR  FLARE  SHIELD  WHATSHOT
-            
 
-    txt_name = ft.TextField(label="Escolha a opção e click no botão OK")
+    name = ''        
+    dados = ''
+    
+    txt_qdado = ft.TextField(label="Quantidade de Dados", width=150)
+    txt_tipo_dado = ft.TextField(label="Tipo de Dado", width=150)
+    txt_name = ft.TextField(label="Digite a quantidade de encontros")
 
-    page.add(app_bar)
-    page.add(ft.Text("\nO que deseja fazer? \n1 - Condições do tempo \n2 - Rolar atributos \n3 - Encontro Aleatorio \n"))
-    page.add(txt_name, ft.ElevatedButton("OK", on_click=btn_click))
-
+    meu_app(name,dados)            
+    
 
 ft.app(main, view=ft.AppView.WEB_BROWSER)
