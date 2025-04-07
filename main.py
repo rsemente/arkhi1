@@ -13,7 +13,7 @@ import random
 def dado(n,l):
   #n = numero de dados
   #l = igual a numero de lados do dado
-
+  ok = ''
   dados = []
   for i in range(n):
     dados.append(random.randrange(l)+1)
