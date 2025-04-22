@@ -193,7 +193,7 @@ def atributos():
       ajuste_total += ajuste
       saida += '\n'+"Carisma: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
       pecas_de_cobre = dado(3,6)
-      pecas_de_cobre = sum(pecas_de_cobre)
+      pecas_de_cobre = sum(pecas_de_cobre*10)
       saida += '\n'+"Cobre Inicial: "+str(pecas_de_cobre)
       
       if ajuste_total >= 0:
@@ -444,15 +444,15 @@ def estacao(data_base=None):
     else: dianoite = 1
     
     if (nome_mes == "Tradesio" and dia >= 20) or nome_mes == "Mildre" or nome_mes == "Alarin" or (nome_mes == "Gaenio" and dia < 21):
-            return "  Estação do dia: Lardésia (outono)" + "  Temperatura: "+ temperatura(1,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do ano: Lardésia (outono)" + "  Temperatura: "+ temperatura(1,dianoite)+"°C" + " às "+str(hora1[0])+"h"
     elif (nome_mes == "Gaenio" and dia >= 21) or nome_mes == "Rasmazi" or nome_mes == "Celidet" or (nome_mes == "Almadin" and dia < 22):
-            return "  Estação do dia: Albayok (inverno)" + "T  emperatura: "+ temperatura(2,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do ano: Albayok (inverno)" + "T  emperatura: "+ temperatura(2,dianoite)+"°C" + " às "+str(hora1[0])+"h"
             #print("\nLuzir (verão)")
     elif (nome_mes == "Almadin" and dia >= 22) or nome_mes == "Flaman" or nome_mes == "Nilantra" or (nome_mes == "Izirium" and dia < 22):
             #print("\nLardésia (outono)")
-            return "  Estação do dia: Almínea (primavera)" + "  Temperatura: "+ temperatura(3,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do ano: Almínea (primavera)" + "  Temperatura: "+ temperatura(3,dianoite)+"°C" + " às "+str(hora1[0])+"h"
     else:
-            return "  Estação do dia: Luzir (verão)" + "  Temperatura: "+ temperatura(0,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do ano: Luzir (verão)" + "  Temperatura: "+ temperatura(0,dianoite)+"°C" + " às "+str(hora1[0])+"h"
        
         
            
