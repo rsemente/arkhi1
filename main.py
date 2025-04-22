@@ -147,8 +147,8 @@ def main(page):
     name = ''        
     dados = ''
     
-    txt_qdado = ft.TextField(label="Quantidade de Dados", width=150)
-    txt_tipo_dado = ft.TextField(label="Tipo de Dado", width=150)
+    txt_qdado = ft.TextField(label="Quantidade", width=100)
+    txt_tipo_dado = ft.TextField(label="Tipo", width=100)
     txt_name = ft.TextField(label="Digite a quantidade de encontros")
 
     meu_app(name,dados)            
