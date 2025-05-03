@@ -37,7 +37,7 @@ import pdfarkhi
 
 
 
-def main(page: Page):
+def main(page):
     page.title = "ARKHI 1"
 
     nome = 'teste'        
