@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 import random
+import pdfarkhi
 
 # Mapeamento dos meses
 meses_alternativos = {
@@ -59,19 +60,19 @@ def hora_do_dia():
 def direcao_ventos():
   saida = ''
   direcao = dado(1,8)
-  if direcao == 1:
+  if direcao[0] == 1:
     saida += "Direção Norte -> Sul"
-  elif direcao == 2:
+  elif direcao[0] == 2:
     saida += "Direção Nordeste -> Sudoeste"
-  elif direcao == 3:
+  elif direcao[0] == 3:
     saida += "Direção Leste -> Oeste"
-  elif direcao == 4:
+  elif direcao[0] == 4:
     saida += "Direção Sudeste -> Noroeste"
-  elif direcao == 5:
+  elif direcao[0] == 5:
     saida += "Direção Sul -> Norte"
-  elif direcao == 6:
+  elif direcao[0] == 6:
     saida += "Direção Sudoeste -> Nordeste"
-  elif direcao == 7:
+  elif direcao[0] == 7:
     saida += "Direção Oeste -> Leste"
   else:
     saida += "Direção Noroeste -> Sudeste"
@@ -193,7 +194,7 @@ def atributos():
       ajuste_total += ajuste
       saida += '\n'+"Carisma: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
       pecas_de_cobre = dado(3,6)
-      pecas_de_cobre = sum(pecas_de_cobre*10)
+      pecas_de_cobre = sum(pecas_de_cobre)
       saida += '\n'+"Cobre Inicial: "+str(pecas_de_cobre)
       
       if ajuste_total >= 0:
@@ -202,6 +203,80 @@ def atributos():
           saida += "\nFRACOTE!"
 
     return saida
+
+
+def atributos2():
+    saida = []
+    personagem =  [None] * 69
+    
+    while True:
+      aux = dado(3,6)
+      total = sum(aux)
+      ajuste = ajuste_padrao(total)
+      ajuste_total = 0
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] #"\n\nForça:        "+str(sum(aux))+"("+ str(ajuste)+")"+str(aux )
+      personagem[3] =  total
+
+      aux = dado(3,6)
+      total = sum(aux)
+      ajuste = ajuste_padrao(total)
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] #'\n'+"Inteligência: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
+      personagem[4] =  total
+
+      aux = dado(3,6)
+      total = sum(aux)
+      ajuste = ajuste_padrao(total)
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] # '\n'+"Sabedoria: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
+      personagem[5] =  total
+
+      aux = dado(3,6)
+      total = sum(aux)
+      ajuste = ajuste_padrao(total)
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] # '\n'+"Destreza: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
+      personagem[6] =  total
+
+      aux = dado(3,6)
+      total = sum(aux)
+      ajuste = ajuste_padrao(total)
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] # '\n'+"Constituição: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
+      personagem[7] =  total
+
+      aux = dado(3,6)
+      total = sum(aux)
+      if  total < 4:
+        ajuste = -2
+      elif total < 9:
+        ajuste = -1
+      elif total < 13:
+        ajuste = 0
+      elif total < 18:
+        ajuste = +1
+      else:
+        ajuste = +2
+      ajuste_total += ajuste
+      saida += [total,ajuste,aux] # '\n'+"Carisma: "+str(sum(aux))+"("+ str(ajuste)+")"+ str(aux)
+      personagem[8] =  total
+
+      pecas_de_cobre = dado(3,6)
+      pecas_de_cobre = sum(pecas_de_cobre)*10
+      saida += [pecas_de_cobre] # '\n'+"Cobre Inicial: "+str(pecas_de_cobre)
+      personagem[63] =  pecas_de_cobre
+  
+      if ajuste_total >= 0:
+        saida += [0]
+        break
+      else:
+        saida += [1]
+        break
+
+    #pdfarkhi.preencher_ficha(personagem)
+    
+    return saida,personagem
 
 tabela1 = [['Humanoide Morto (1)',[1,1],[0,0]] ,
            ['Yeldra (1d2)',[1,2],[2,0]],
@@ -444,21 +519,29 @@ def estacao(data_base=None):
     else: dianoite = 1
     
     if (nome_mes == "Tradesio" and dia >= 20) or nome_mes == "Mildre" or nome_mes == "Alarin" or (nome_mes == "Gaenio" and dia < 21):
-            return "  Estação do ano: Lardésia (outono)" + "  Temperatura: "+ temperatura(1,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do dia: Lardésia (outono)" + "  Temperatura: "+ temperatura(1,dianoite)+"°C" + " às "+str(hora1[0])+"h"
     elif (nome_mes == "Gaenio" and dia >= 21) or nome_mes == "Rasmazi" or nome_mes == "Celidet" or (nome_mes == "Almadin" and dia < 22):
-            return "  Estação do ano: Albayok (inverno)" + "T  emperatura: "+ temperatura(2,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do dia: Albayok (inverno)" + "T  emperatura: "+ temperatura(2,dianoite)+"°C" + " às "+str(hora1[0])+"h"
             #print("\nLuzir (verão)")
     elif (nome_mes == "Almadin" and dia >= 22) or nome_mes == "Flaman" or nome_mes == "Nilantra" or (nome_mes == "Izirium" and dia < 22):
             #print("\nLardésia (outono)")
-            return "  Estação do ano: Almínea (primavera)" + "  Temperatura: "+ temperatura(3,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do dia: Almínea (primavera)" + "  Temperatura: "+ temperatura(3,dianoite)+"°C" + " às "+str(hora1[0])+"h"
     else:
-            return "  Estação do ano: Luzir (verão)" + "  Temperatura: "+ temperatura(0,dianoite)+"°C" + " às "+str(hora1[0])+"h"
+            return "  Estação do dia: Luzir (verão)" + "  Temperatura: "+ temperatura(0,dianoite)+"°C" + " às "+str(hora1[0])+"h"
        
         
            
 def mostrar_calendario_arkhi(data_base=None):
     if data_base is None:
+        # Data de hoje
         data_base = date.today()
+
+    # Dia 1º de janeiro do mesmo ano
+    inicio_do_ano = date(data_base.year, 1, 1)
+
+    # Diferença de dias (incluindo o dia de hoje)
+    dias_passados = (data_base - inicio_do_ano).days + 1
+
     saida = ''
     ano = "Ano: "+str(data_base.year - 1922)+"\n"
     saida +=  ano 
@@ -468,7 +551,7 @@ def mostrar_calendario_arkhi(data_base=None):
         nome_dia_semana = dias_da_semana_alternativos[dia.weekday()]
         nome_mes = meses_alternativos[dia.month]
         if i == 0:
-            saida += "Hoje: "+nome_dia_semana + ", " +str(dia.day)+" de "+nome_mes+estacao()+"\n"  
+            saida += "Hoje: "+str(dias_passados)+", "+nome_dia_semana + ", " +str(dia.day)+" de "+nome_mes+estacao()+"\n"  
         else:
             saida += "        "+nome_dia_semana + ", " +str(dia.day)+" de "+nome_mes+estacao()+"\n"  
 
