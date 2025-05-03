@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 import random
-import pdfarkhi
+#import pdfarkhi
 
 # Mapeamento dos meses
 meses_alternativos = {
