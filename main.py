@@ -2,7 +2,7 @@ import flet as ft
 from flet import AppBar, ElevatedButton, Page, Text, View, colors
 import random
 import arkhi
-import pdfarkhi
+#import pdfarkhi
 
 #progama pra auxiliar na criação de Arkhi
 
@@ -116,7 +116,7 @@ def main(page):
                     personagem[7] = int(txt_con.value)
                     personagem[8] = int(txt_car.value)
             
-                    pdfarkhi.preencher_ficha(personagem, save_location)
+                    #pdfarkhi.preencher_ficha(personagem, save_location)
                 except Exception as e:
                     print("Erro ao salvar",e)
                     
