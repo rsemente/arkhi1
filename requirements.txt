@@ -1,5 +1,5 @@
 flet==0.27.6
-PyMuPD #==1.23.26
+#PyMuPD #==1.23.26
 pymupdf
 #pymupdf==1.25.5
 fillpdf==0.7.3
