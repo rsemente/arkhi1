@@ -2,7 +2,7 @@ import flet as ft
 from flet import AppBar, ElevatedButton, Page, Text, View, colors
 import random
 import arkhi
-import pdfarkhi
+#import pdfarkhi
 
 #progama pra auxiliar na criação de Arkhi
 
