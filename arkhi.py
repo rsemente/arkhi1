@@ -307,7 +307,7 @@ def Tabela1():
     return saida
 
 tabela2 = [['Ghoul (1d3)',[1,3],[3,0]],
-           ['Escaravelho (1d6)',[1,6],[8,0]],
+           ['Escaravelho (1d6)',[1,6],[2,0]],
            ['Gigante Ígneo (1)',[1,1],[11,2]],
            ['Gigante do Deserto (1)',[1,1],[8,0]],
            ['Cavalo Selvagem (1d6)',[1,6],[2,0]],
