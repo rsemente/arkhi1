@@ -171,8 +171,8 @@ def main(page):
     txt_saida = ft.TextField(f"{nome}",multiline=True,)
     txt_saida2 = ft.TextField(f"{nome}",multiline=True, width=300)
     txt_name = ft.TextField(label="Digite a quantidade de encontros")
-    txt_qdado = ft.TextField(label="Quantidade de Dados", width=150)
-    txt_tipo_dado = ft.TextField(label="Tipo de Dado", width=150)
+    txt_qdado = ft.TextField(label="Quantidade de Dados", width=100)
+    txt_tipo_dado = ft.TextField(label="Tipo de Dado", width=100)
 
     txt_nome_personagem = ft.TextField(label="Digite o nome do personagem")
     classes_jogaveis = []
