@@ -216,7 +216,7 @@ def main(page):
                     AppBar(leading = ft.Icon(ft.Icons.DARK_MODE),
                                      title=Text("Arkhi 1"),
                                      bgcolor=ft.Colors.GREY_500),
-                    ElevatedButton("Criar Personagens", on_click=lambda _: page.go("/store")),
+                    #ElevatedButton("Criar Personagens", on_click=lambda _: page.go("/store")),
                     ElevatedButton("Que dia é hoje em Arkhi?", on_click=btn_click_4),
                     ElevatedButton("Gerar condições iniciais de jogo", on_click=btn_click),
                     ft.Row(spacing=10, controls=[ft.ElevatedButton("Gerar encontros aleatóreos",
